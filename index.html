@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emergency Aid for Civilians in The Middle East – Humanitarian Support</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Vazirmatn:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #c8102e;
+      --bg: #0f0f0f;
+      --card: #1a1a1a;
+      --text: #e8e8e8;
+      --text-muted: #b0b0b0;
+      --border: #2a2a2a;
+      --shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+    body.light-mode {
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #212529;
+      --text-muted: #6c757d;
+      --border: #dee2e6;
+      --shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      transition: all 0.4s;
+    }
+    [data-lang="fa"], [data-lang="ar"] { direction: rtl; }
+    [data-lang="fa"] { font-family: 'Vazirmatn', sans-serif; }
+    [data-lang="ar"] { font-family: 'Amiri', serif; }
+
+    header {
+      height: 65vh; min-height: 480px;
+      background: linear-gradient(rgba(10,10,20,0.45), rgba(10,10,20,0.75)),
+                  url('https://images.unsplash.com/photo-1585208798174-6cedd78e0198?auto=format&fit=crop&w=2340&q=80') center/cover fixed;
+      display: flex; align-items: center; justify-content: center; text-align: center; position: relative;
+    }
+    header::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, var(--bg) 95%); pointer-events: none; }
+    .hero-content { position: relative; z-index: 2; max-width: 960px; }
+    .hero-content h1 { font-size: clamp(3.2rem,9vw,6.2rem); font-weight: 800; color: #fff; text-shadow: 0 5px 20px rgba(0,0,0,0.9); margin: 0 0 1rem; }
+    .hero-content p { font-size: clamp(1.35rem,4vw,1.75rem); color: #f0f0ff; text-shadow: 0 3px 14px rgba(0,0,0,0.8); }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    section { background: var(--card); border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); padding: 3rem 2.5rem; margin: 3rem 0; }
+    h2 { color: var(--primary); font-size: 2.2rem; position: relative; margin: 0 0 1.8rem; }
+    h2::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 70px; height: 4px; background: var(--primary); }
+
+    .tabs { display: flex; background: var(--card); border-radius: 12px; overflow: hidden; margin-bottom: 2.5rem; border: 1px solid var(--border); }
+    .tab-btn { flex: 1; padding: 1.3rem; background: transparent; border: none; color: var(--text-muted); cursor: pointer; }
+    .tab-btn.active { background: var(--primary); color: white; }
+
+    .btn-copy { background: var(--primary); color: white; border: none; padding: 1.1rem 2.4rem; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 20px rgba(200,16,46,0.35); transition: all 0.3s; }
+    .btn-copy:hover { transform: translateY(-3px); }
+
+    .qr-center img { max-width: 280px; border: 12px solid var(--card); border-radius: 20px; box-shadow: 0 12px 50px rgba(200,16,46,0.25); }
+
+    .video-container { position: relative; padding-bottom: 56.25%; border-radius: 16px; overflow: hidden; margin: 2rem 0; box-shadow: 0 10px 40px rgba(0,0,0,0.55); }
+    .video-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    #side-menu { position: fixed; top: 0; left: -320px; width: 320px; height: 100%; background: var(--card); transition: left .5s; z-index: 1000; padding-top: 100px; box-shadow: 12px 0 50px rgba(0,0,0,0.4); }
+    #side-menu.open { left: 0; }
+    .menu-item { display: block; padding: 1.4rem 2.5rem; color: var(--text); text-decoration: none; font-size: 1.15rem; transition: all 0.3s; }
+    .menu-item:hover, .menu-item.active { background: rgba(200,16,46,0.15); }
+
+    #menu-toggle, #theme-toggle, #lang-switch { position: fixed; top: 20px; z-index: 1100; background: var(--primary); color: white; border: none; padding: 0.9rem 1.2rem; font-size: 1.4rem; border-radius: 12px; cursor: pointer; box-shadow: 0 4px 15px rgba(200,16,46,0.45); }
+    #menu-toggle { left: 20px; }
+    #theme-toggle { right: 140px; background: var(--card); color: var(--text); border: 1px solid var(--border); font-size: 1.1rem; padding: 0.7rem 1rem; }
+    #lang-switch { right: 20px; background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 0.7rem 1.4rem; font-size: 1rem; }
+
+    footer { text-align: center; padding: 3.5rem 1rem 2rem; color: var(--text-muted); border-top: 1px solid var(--border); font-size: 0.95rem; }
+    @media (min-width:1024px) { #side-menu { left: 0; } #menu-toggle { display: none; } .container { margin-left: 340px; } }
+  </style>
+</head>
+<body data-lang="en">
+
+<button id="menu-toggle"><i class="fas fa-bars"></i></button>
+<button id="theme-toggle"><i class="fas fa-moon"></i></button>
+<div id="lang-switch">English / فارسی / عربي</div>
+
+<div id="side-menu">
+  <a href="#home" class="menu-item active" data-key="home">Home</a>
+  <a href="#crisis" class="menu-item" data-key="crisis">The Crisis</a>
+  <a href="#donation" class="menu-item" data-key="donation">Donate Crypto</a>
+  <a href="#stories" class="menu-item" data-key="stories">Stories of People Affected</a>
+  <a href="#support" class="menu-item" data-key="support">Support & FAQ</a>
+</div>
+
+<header id="home">
+  <div class="hero-content">
+    <h1 data-key="title">Emergency Humanitarian Aid for The Middle East</h1>
+    <p data-key="subtitle">Supporting Civilians Devastated by the 2026 Bombings – Your Help Matters Now</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <section id="crisis">
+    <h2 data-key="crisis">The Humanitarian Crisis</h2>
+    <p data-key="crisis-p1">Since February 28, 2026, intense airstrikes have caused widespread civilian suffering across Iran. Verified reports indicate:</p>
+    <ul>
+      <li data-key="crisis-li1">Over 1,000–1,348+ civilians killed, including 168–181+ children</li>
+      <li data-key="crisis-li2">Thousands wounded, many with severe burns and shrapnel injuries</li>
+      <li data-key="crisis-li3">Deadliest single incident: attack on a girls' primary school in Minab killing 165–168+ (mostly children)</li>
+      <li data-key="crisis-li4">At least 13 hospitals and health facilities damaged or destroyed</li>
+      <li data-key="crisis-li5">Hundreds of thousands displaced; acute shortages of medicine, food, water and power</li>
+    </ul>
+    <p data-key="crisis-p2"><strong>Cryptocurrency donations</strong> are being collected to provide immediate medical supplies, food, water, shelter, and support for displaced families and children.</p>
+  </section>
+
+  <section id="donation">
+    <h2 data-key="donate">Donate with Crypto</h2>
+    <p style="text-align:center; font-size:1.35rem; margin:1.5rem 0 2.5rem; color:var(--text-muted);" data-key="every-satoshi">
+      Every contribution, no matter how small, helps save lives. Thank you.
+    </p>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="btc" data-key="btc_tab">Bitcoin (BTC)</button>
+      <button class="tab-btn" data-tab="eth" data-key="eth_tab">Ethereum (ETH)</button>
+      <button class="tab-btn" data-tab="usdt" data-key="usdt_tab">USDT (Tether)</button>
+    </div>
+
+    <div id="btc" class="tab-content" style="display:block;">
+      <div class="qr-center">
+        <img src="https://i.postimg.cc/x89dDHD4/1773322105515.jpg.png" alt="Bitcoin QR Code">
+      </div>
+      <div class="crypto-addr">
+        <strong data-key="crypto-address">Bitcoin Address:</strong><br>
+        <span class="address-text">12tmZH2893ZfWpr6fi8WtaiZhcvqsHwSAA</span>
+      </div>
+      <p style="text-align:center; color:var(--text-muted);" data-key="btc-network">Network: Bitcoin (BTC)</p>
+      <p style="text-align:center; margin-top:2rem;">
+        <button class="btn-copy copy-btn" data-copy-target="btc">
+          <i class="fas fa-copy"></i> <span data-key="copy-btn">Copy Address</span>
+        </button>
+      </p>
+    </div>
+
+    <div id="eth" class="tab-content" style="display:none;">
+      <div class="qr-center">
+        <img src="https://i.postimg.cc/HnbP5cVf/1773323152111.jpg.png" alt="Ethereum QR Code">
+      </div>
+      <div class="crypto-addr">
+        <strong data-key="crypto-address">Ethereum Address:</strong><br>
+        <span class="address-text">0x5db44b2d3e85806757e3d0e66e14164936a87d0b</span>
+      </div>
+      <p style="text-align:center; color:var(--text-muted);" data-key="eth-network">Network: Ethereum (ERC-20)</p>
+      <p style="text-align:center; margin-top:2rem;">
+        <button class="btn-copy copy-btn" data-copy-target="eth">
+          <i class="fas fa-copy"></i> <span data-key="copy-btn">Copy Address</span>
+        </button>
+      </p>
+    </div>
+
+    <div id="usdt" class="tab-content" style="display:none;">
+      <div class="qr-center">
+        <img src="https://i.postimg.cc/W1gxryJS/1773323290677.jpg.png" alt="USDT QR Code">
+      </div>
+      <div class="crypto-addr">
+        <strong data-key="crypto-address">USDT Address:</strong><br>
+        <span class="address-text">TDU9TyXY96J34XE9AZtVEhiuB4FgbcCJar</span>
+      </div>
+      <p style="text-align:center; color:var(--text-muted);" data-key="usdt-network">Network: TRC-20 (Tron – recommended) or ERC-20</p>
+      <p style="text-align:center; margin-top:2rem;">
+        <button class="btn-copy copy-btn" data-copy-target="usdt">
+          <i class="fas fa-copy"></i> <span data-key="copy-btn">Copy Address</span>
+        </button>
+      </p>
+    </div>
+
+    <div class="warning">
+      <strong data-key="important"><i class="fas fa-exclamation-triangle"></i> Important:</strong> 
+      <span data-key="warning-text">Only send to the address shown on the active tab. Double-check the network to avoid loss of funds. For maximum trust, consider donating through established organizations.</span>
+    </div>
+  </section>
+
+  <section id="stories">
+    <h2 data-key="stories-title">Stories of People Affected</h2>
+    <p data-key="stories-intro">These videos show real human impact — grieving families, mothers comforting children during explosions, secret messages from inside Iran, and reports on school strikes and displacement. (Content from public news sources; viewer discretion advised.)</p>
+
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/NRvHeFXKM68" title="Family Shares Devastating Moment They Learned Loved Ones Died In Iran Attack" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <p data-key="vid-desc1">Grieving family reveals the moment they learned loved ones were killed in the attacks.</p>
+
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/TvsWgUZZsYw" title="Messages sent in secret from people in Iran reveal conditions amid war" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <p data-key="vid-desc2">Secret audio messages from Iranians during internet blackout describe daily life and fear.</p>
+
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/ruPlAXeL2SA" title="Discussion on casualty numbers and school bombing" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <p data-key="vid-desc3">Report examining civilian casualties, including the tragic school incident in Minab.</p>
+  </section>
+
+  <section id="support">
+    <h2 data-key="support-title">Support & FAQ</h2>
+    <p data-key="support-p1"><strong>How will funds be used?</strong> 100% toward emergency medical supplies, food/water, shelter for displaced families, and child welfare — with transparent updates (wallet explorer link coming soon).</p>
+    <p data-key="support-p2"><strong>Who runs this?</strong> Independent humanitarian effort. Not affiliated with any government.</p>
+    <p data-key="support-p3"><strong>Other ways to help?</strong> Donate to verified orgs: Iranian Red Crescent, Médecins Sans Frontières (MSF), UNHCR. Share this page. Advocate for civilian protection.</p>
+    <p data-key="support-p4">Contact: <a href="humanitarianaid2026@gmail.com">humanitarianaid2026@gmail.com</a>. We welcome volunteers for translation, updates, etc.</p>
+  </section>
+
+</div>
+
+<footer>
+  <p data-key="footer">Independent humanitarian initiative • March 2026</p>
+  <p data-key="footer-questions" style="margin-top:0.8rem;">Questions or updates → [Contact: <a href="humanitarianaid2026@gmail.com">humanitarianaid2026@gmail.com</a>]</p>
+</footer>
+
+<script>
+// Theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.body.classList.add(savedTheme + '-mode');
+themeToggle.innerHTML = savedTheme === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+themeToggle.onclick = () => {
+  document.body.classList.toggle('light-mode');
+  const isLight = document.body.classList.contains('light-mode');
+  themeToggle.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+};
+
+// Language toggle
+const langSwitch = document.getElementById('lang-switch');
+const languages = ['en', 'fa', 'ar'];
+let langIndex = 0;
+
+const trans = {
+  en: {
+    home: "Home",
+    crisis: "The Humanitarian Crisis",
+    donation: "Donate with Crypto",
+    stories: "Stories of People Affected",
+    support: "Support & FAQ",
+    title: "Emergency Humanitarian Aid for Iran",
+    subtitle: "Supporting Civilians Devastated by the 2026 Bombings – Your Help Matters Now",
+    crisis_p1: "Since February 28, 2026, intense airstrikes have caused widespread civilian suffering across Iran. Verified reports indicate:",
+    crisis_li1: "Over 1,000–1,348+ civilians killed, including 168–181+ children",
+    crisis_li2: "Thousands wounded, many with severe burns and shrapnel injuries",
+    crisis_li3: "Deadliest single incident: attack on a girls' primary school in Minab killing 165–168+ (mostly children)",
+    crisis_li4: "At least 13 hospitals and health facilities damaged or destroyed",
+    crisis_li5: "Hundreds of thousands displaced; acute shortages of medicine, food, water and power",
+    crisis_p2: "<strong>Cryptocurrency donations</strong> are being collected to provide immediate medical supplies, food, water, shelter, and support for displaced families and children.",
+    donate: "Donate with Crypto",
+    every_satoshi: "Every contribution, no matter how small, helps save lives. Thank you.",
+    btc_tab: "Bitcoin (BTC)",
+    eth_tab: "Ethereum (ETH)",
+    usdt_tab: "USDT (Tether)",
+    crypto_address: "Address:",
+    btc_network: "Network: Bitcoin (BTC)",
+    eth_network: "Network: Ethereum (ERC-20)",
+    usdt_network: "Network: TRC-20 (Tron – recommended) or ERC-20",
+    copy_btn: "Copy Address",
+    important: "Important:",
+    warning_text: "Only send to the address shown on the active tab. Double-check the network to avoid loss of funds. For maximum trust, consider donating through established organizations.",
+    stories_title: "Stories of People Affected",
+    stories_intro: "These videos show real human impact — grieving families, mothers comforting children during explosions, secret messages from inside Iran, and reports on school strikes and displacement. (Content from public news sources; viewer discretion advised.)",
+    vid_desc1: "Grieving family reveals the moment they learned loved ones were killed in the attacks.",
+    vid_desc2: "Secret audio messages from Iranians during internet blackout describe daily life and fear.",
+    vid_desc3: "Report examining civilian casualties, including the tragic school incident in Minab.",
+    support_title: "Support & FAQ",
+    support_p1: "<strong>How will funds be used?</strong> 100% toward emergency medical supplies, food/water, shelter for displaced families, and child welfare — with transparent updates (wallet explorer link coming soon).",
+    support_p2: "<strong>Who runs this?</strong> Independent humanitarian effort. Not affiliated with any government.",
+    support_p3: "<strong>Other ways to help?</strong> Donate to verified orgs: Iranian Red Crescent, Médecins Sans Frontières (MSF), UNHCR. Share this page. Advocate for civilian protection.",
+    support_p4: "Contact: [your email / secure channel]. We welcome volunteers for translation, updates, etc.",
+    footer: "Independent humanitarian initiative • March 2026",
+    footer_questions: "Questions or updates → [your contact]"
+  },
+  fa: {
+    home: "خانه",
+    crisis: "بحران انسانی",
+    donation: "کمک با کریپتو",
+    stories: "داستان‌های آسیب‌دیدگان",
+    support: "پشتیبانی و پرسش‌ها",
+    title: "کمک‌های بشردوستانه اضطراری برای ایران",
+    subtitle: "حمایت از غیرنظامیان آسیب‌دیده از بمباران‌های ۲۰۲۶ – کمک شما اکنون اهمیت دارد",
+    crisis_p1: "از ۲۸ فوریه ۲۰۲۶، حملات هوایی شدید باعث رنج گسترده غیرنظامیان در سراسر ایران شده است. گزارش‌های تأییدشده نشان می‌دهد:",
+    crisis_li1: "بیش از ۱۰۰۰–۱۳۴۸+ غیرنظامی کشته شده، از جمله ۱۶۸–۱۸۱+ کودک",
+    crisis_li2: "هزاران زخمی، بسیاری با سوختگی شدید و جراحات ترکش",
+    crisis_li3: "حادثه مرگبارترین: حمله به مدرسه ابتدایی دخترانه در میناب که ۱۶۵–۱۶۸+ نفر (عمدتاً کودکان) را کشت",
+    crisis_li4: "حداقل ۱۳ بیمارستان و مرکز بهداشتی آسیب دیده یا نابود شده",
+    crisis_li5: "صدها هزار آواره؛ کمبود شدید دارو، غذا، آب و برق",
+    crisis_p2: "<strong>کمک‌های ارز دیجیتال</strong> برای تأمین لوازم پزشکی فوری، غذا، آب، سرپناه و حمایت از خانواده‌های آواره و کودکان جمع‌آوری می‌شود.",
+    donate: "کمک با ارز دیجیتال",
+    every_satoshi: "هر کمک، هر چقدر کوچک، به نجات جان‌ها کمک می‌کند. سپاسگزاریم.",
+    btc_tab: "بیت‌کوین (BTC)",
+    eth_tab: "اتریوم (ETH)",
+    usdt_tab: "تتر (USDT)",
+    crypto_address: "آدرس:",
+    btc_network: "شبکه: بیت‌کوین (BTC)",
+    eth_network: "شبکه: اتریوم (ERC-20)",
+    usdt_network: "شبکه: TRC-20 (ترون – توصیه‌شده) یا ERC-20",
+    copy_btn: "کپی آدرس",
+    important: "مهم:",
+    warning_text: "فقط به آدرس نمایش‌داده‌شده در تب فعال ارسال کنید. شبکه را دوبار بررسی کنید تا از دست رفتن وجوه جلوگیری شود. برای اعتماد بیشتر، از طریق سازمان‌های معتبر کمک کنید.",
+    stories_title: "داستان‌های افراد آسیب‌دیده",
+    stories_intro: "این ویدیوها تأثیر واقعی انسانی را نشان می‌دهند — خانواده‌های داغدار، مادران در حال آرام کردن کودکان هنگام انفجار، پیام‌های مخفی از داخل ایران، و گزارش‌های حمله به مدارس و آوارگی. (محتوا از منابع خبری عمومی؛ احتیاط در مشاهده توصیه می‌شود.)",
+    vid_desc1: "خانواده داغدار لحظه‌ای را که از مرگ عزیزانشان در حملات مطلع شدند، بازگو می‌کند.",
+    vid_desc2: "پیام‌های صوتی مخفی از ایرانیان در زمان قطعی اینترنت، زندگی روزمره و ترس را توصیف می‌کند.",
+    vid_desc3: "گزارش بررسی تلفات غیرنظامی، از جمله حادثه دلخراش مدرسه در میناب.",
+    support_title: "پشتیبانی و پرسش‌های متداول",
+    support_p1: "<strong>وجوه چگونه استفاده می‌شود؟</strong> ۱۰۰٪ برای لوازم پزشکی اضطراری، غذا/آب، سرپناه برای خانواده‌های آواره، و حمایت از کودکان — با به‌روزرسانی‌های شفاف (لینک اکسپلورر کیف پول به‌زودی).",
+    support_p2: "<strong>چه کسی این را اداره می‌کند؟</strong> تلاش مستقل بشردوستانه. وابسته به هیچ دولتی نیست.",
+    support_p3: "<strong>راه‌های دیگر کمک؟</strong> به سازمان‌های معتبر کمک کنید: هلال احمر ایران، پزشکان بدون مرز، UNHCR. این صفحه را به اشتراک بگذارید. برای حفاظت از غیرنظامیان تلاش کنید.",
+    support_p4: "تماس: [ایمیل یا کانال امن شما]. داوطلبان برای ترجمه، به‌روزرسانی و غیره خوش‌آمدند.",
+    footer: "ابتکار مستقل بشردوستانه • اسفند ۱۴۰۴",
+    footer_questions: "سؤالات یا به‌روزرسانی → [تماس شما]"
+  },
+  ar: {
+    home: "الرئيسية",
+    crisis: "الأزمة الإنسانية",
+    donation: "التبرع بالعملات المشفرة",
+    stories: "قصص المتضررين",
+    support: "الدعم والأسئلة الشائعة",
+    title: "المساعدات الإنسانية الطارئة لإيران",
+    subtitle: "دعم المدنيين المتضررين من قصف 2026 – مساعدتك مهمة الآن",
+    crisis_p1: "منذ 28 فبراير 2026، تسببت الغارات الجوية الشديدة في معاناة واسعة للمدنيين عبر إيران. التقارير المؤكدة تشير إلى:",
+    crisis_li1: "أكثر من 1000–1348+ مدني قتلوا، بما في ذلك 168–181+ طفل",
+    crisis_li2: "آلاف الجرحى، الكثيرون بإصابات حروق شديدة وشظايا",
+    crisis_li3: "الحادث الأكثر دموية: هجوم على مدرسة ابتدائية للبنات في ميناب أسفر عن مقتل 165–168+ (غالبيتهم أطفال)",
+    crisis_li4: "ما لا يقل عن 13 مستشفى ومنشأة صحية تضررت أو دمرت",
+    crisis_li5: "مئات الآلاف مشردون؛ نقص حاد في الأدوية والغذاء والماء والكهرباء",
+    crisis_p2: "<strong>التبرعات بالعملات المشفرة</strong> يتم جمعها لتوفير الإمدادات الطبية الفورية والغذاء والماء والمأوى ودعم الأسر النازحة والأطفال.",
+    donate: "التبرع بالعملات المشفرة",
+    every_satoshi: "كل مساهمة، مهما كانت صغيرة، تساعد في إنقاذ الأرواح. شكراً لك.",
+    btc_tab: "بيتكوين (BTC)",
+    eth_tab: "إيثيريوم (ETH)",
+    usdt_tab: "تيثر (USDT)",
+    crypto_address: "العنوان:",
+    btc_network: "الشبكة: بيتكوين (BTC)",
+    eth_network: "الشبكة: إيثيريوم (ERC-20)",
+    usdt_network: "الشبكة: TRC-20 (ترون – موصى به) أو ERC-20",
+    copy_btn: "نسخ العنوان",
+    important: "مهم:",
+    warning_text: "أرسل فقط إلى العنوان المعروض في التبويب النشط. تحقق مرتين من الشبكة لتجنب فقدان الأموال. للحصول على أقصى درجات الثقة، فكر في التبرع من خلال منظمات راسخة.",
+    stories_title: "قصص المتضررين",
+    stories_intro: "هذه الفيديوهات تظهر التأثير البشري الحقيقي — عائلات ثكلى، أمهات يهدئن أطفالهن أثناء الانفجارات، رسائل سرية من داخل إيران، وتقارير عن هجمات على المدارس والنزوح. (المحتوى من مصادر إخبارية عامة؛ يُنصح بالحذر أثناء المشاهدة.)",
+    vid_desc1: "عائلة ثكلى تكشف اللحظة التي علمت فيها بمقتل أحبائها في الهجمات.",
+    vid_desc2: "رسائل صوتية سرية من إيرانيين أثناء انقطاع الإنترنت تصف الحياة اليومية والخوف.",
+    vid_desc3: "تقرير يفحص الخسائر المدنية، بما في ذلك الحادث المأساوي في مدرسة ميناب.",
+    support_title: "الدعم والأسئلة الشائعة",
+    support_p1: "<strong>كيف سيتم استخدام الأموال؟</strong> 100% للإمدادات الطبية الطارئة والغذاء/الماء والمأوى للعائلات النازحة ورعاية الأطفال — مع تحديثات شفافة (رابط مستكشف المحفظة قريباً).",
+    support_p2: "<strong>من يدير هذا؟</strong> جهد إنساني مستقل. غير مرتبط بأي حكومة.",
+    support_p3: "<strong>طرق أخرى للمساعدة؟</strong> التبرع للمنظمات الموثوقة: الهلال الأحمر الإيراني، أطباء بلا حدود، المفوضية السامية للأمم المتحدة لشؤون اللاجئين. شارك هذه الصفحة. دافع عن حماية المدنيين.",
+    support_p4: "الاتصال: [بريدك الإلكتروني / قناة آمنة]. نرحب بالمتطوعين للترجمة والتحديثات وغيرها.",
+    footer: "مبادرة إنسانية مستقلة • مارس 2026",
+    footer_questions: "أسئلة أو تحديثات → [جهة الاتصال الخاصة بك]"
+  }
+};
+
+langSwitch.onclick = () => {
+  langIndex = (langIndex + 1) % languages.length;
+  const lang = languages[langIndex];
+  document.body.dataset.lang = lang;
+
+  langSwitch.textContent = {
+    en: 'English / فارسی / عربي',
+    fa: 'فارسی / عربي / English',
+    ar: 'عربي / English / فارسی'
+  }[lang];
+
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    if (trans[lang]?.[key]) {
+      el.innerHTML = trans[lang][key];
+    }
+  });
+};
+
+// Side menu
+document.getElementById('menu-toggle').onclick = () => {
+  document.getElementById('side-menu').classList.toggle('open');
+};
+
+// Tab switching & copy
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).style.display = 'block';
+  };
+});
+
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.onclick = () => {
+    const target = btn.dataset.copyTarget;
+    const addr = document.querySelector(`#${target} .address-text`)?.textContent?.trim();
+    if (addr) {
+      navigator.clipboard.writeText(addr).then(() => {
+        const span = btn.querySelector('span');
+        const orig = span.textContent;
+        span.textContent = 'Copied!';
+        setTimeout(() => { span.textContent = orig; }, 1800);
+      }).catch(() => alert('Copy failed – copy manually'));
+    }
+  };
+});
+</script>
+</body>
+</html>
